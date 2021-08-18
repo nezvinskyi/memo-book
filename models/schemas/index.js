@@ -1,3 +1,4 @@
 const userSchema = require('./user');
+const memoSchema = require('./memo');
 
-module.exports = { userSchema };
+module.exports = { userSchema, memoSchema };

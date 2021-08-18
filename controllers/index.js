@@ -1,3 +1,4 @@
 const users = require('./users');
+const memos = require('./memos');
 
-module.exports = { users };
+module.exports = { users, memos };
