@@ -1,7 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
-// const notes = require('./data/notes');
 const routes = require('./routes');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 
@@ -14,11 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/users', routes.users);
-app.use('/api/notes', routes.notes);
-
-// app.get('/', (req, res) => {
-//   res.send('API is running');
-// });
+app.use('/api/v1/memos', routes.memos);
 
 // app.get('/api/notes/:id', (req, res) => {
 //   const { id } = req.params;
