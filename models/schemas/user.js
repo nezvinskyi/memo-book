@@ -24,7 +24,7 @@ const userSchema = Schema(
     },
     avatar: {
       type: String,
-      required: true,
+      // required: true,
       default: function () {
         return gravatar.url(this.email, { protocol: 'https' });
       },
