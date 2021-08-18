@@ -1,7 +1,9 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
-const notes = require('./data/notes');
+// const notes = require('./data/notes');
+const routes = require('./routes');
+const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 
 const app = express();
 
@@ -11,27 +13,30 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running');
-});
+app.use('/api/v1/users', routes.users);
+app.use('/api/notes', routes.notes);
 
-app.get('/api/notes', (req, res) => {
-  res.send(notes);
-});
+// app.get('/', (req, res) => {
+//   res.send('API is running');
+// });
 
-app.get('/api/notes/:id', (req, res) => {
-  const { id } = req.params;
-  const note = notes.find(n => n._id === id);
-  res.send(note);
-});
+// app.get('/api/notes/:id', (req, res) => {
+//   const { id } = req.params;
+//   const note = notes.find(n => n._id === id);
+//   res.send(note);
+// });
 
-app.use((_, res) => {
-  res.status(404).json({ message: 'Not found' });
-});
+// app.use((_, res) => {
+//   res.status(404).json({ message: 'Not found' });
+// });
 
-app.use((err, _, res, __) => {
-  const { code = 500, message = 'Server error' } = err;
-  res.status(code).json({ message });
-});
+app.use(notFound);
+
+// app.use((err, _, res, __) => {
+//   const { code = 500, message = 'Server error' } = err;
+//   res.status(code).json({ message });
+// });
+
+app.use(errorHandler);
 
 module.exports = app;
