@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { memos: ctrl } = require('../controllers/');
-// const memos = require('../data/memos');
 const protect = require('../middlewares/authMiddleware');
 
 router.get('/', protect, ctrl.getMemos);
